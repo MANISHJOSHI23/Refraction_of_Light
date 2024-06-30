@@ -72,7 +72,6 @@ jobs:
           latex-bin
           mathastext
           microtype
-          ms
           physics
           preview
           ragged2e
