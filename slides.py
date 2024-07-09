@@ -1408,4 +1408,153 @@ class ConvexImg(Slide):
         self.play(Unwrite(t1),Unwrite(img1),Unwrite(pos))
         self.wait(2)
         self.next_slide()
+class ConcaveLensImg(Slide):
+    def construct(self):
+        title = Title('Ray Diagram for Concave Lens',color=GREEN,match_underline_width_to_text=True)
+        self.play(Write(title))
+        case1 = Tex(r"(1) A ray of light parallel to the principal axis of a concave lens,", r"after refraction the ray appears to diverge from the principal focus located on the same side of the lens. ",font_size=45,color=GOLD_E,tex_environment="{minipage}{10cm}").next_to(title,DOWN).to_edge(LEFT)
+        self.next_slide()
+        [l,pa,f,s1,s2] = ConcaveLens(R=6.5,pae=0,pas=0)
+        ir1 = Ray(start=l.get_center()+2*f*LEFT+1.2*UP,end=l.get_center()+1.2*UP,color=PURE_GREEN)
+        drr = DashedLine(start=l.get_center()+f*LEFT,end= ir1[0].get_end(),color=GREY_A)
+        rr1 = Ray(start=ir1[0].get_end(),end=ir1[0].get_end()+3*drr.get_unit_vector(),color=PURE_GREEN,ext=0.4)
+        img1=VGroup(l,pa,ir1,rr1,drr).next_to(case1,DOWN,buff=0.1)
+
+        anm = [case1[0],VGroup(l,pa,ir1),VGroup(rr1,drr,case1[1])]
+
+        for item in anm:
+            self.play(Write(item))
+            self.next_slide()
+
+        self.play(FadeOut(case1,img1))
+        case2 = Tex(r"(2) A ray of light appearing to meet at the principal focus of a concave lens,", r" after refraction from a concave lens, will emerge parallel to the principal axis. ",font_size=45,color=GOLD_E,tex_environment="{minipage}{10cm}").next_to(title,DOWN).to_edge(LEFT)
+        self.next_slide()
+        [l,pa,f,s1,s2] = ConcaveLens(R=6.5,pae=0,pas=0)
+        rr1 = Ray(start=l.get_center()-1.2*UP,end=l.get_center()+1.5*f*RIGHT-1.2*UP,color=PURE_GREEN)
+        drr = DashedLine(start=l.get_center()-1.2*UP,end=l.get_center()+f*RIGHT,color=GREY_A)
+        ir1 = Ray(start=l.get_center()-1.2*UP-3*drr.get_unit_vector(),end=l.get_center()-1.2*UP,color=PURE_GREEN)
+        
+        img2=VGroup(l,pa,ir1,rr1,drr).next_to(case2,DOWN,buff=1)
+
+        anm = [case2[0],VGroup(l,pa,ir1,drr),VGroup(rr1,case2[1])]
+
+        for item in anm:
+            self.play(Write(item))
+            self.next_slide()
+
+        self.play(FadeOut(case2,img2))
+
+        case3 = Tex(r"(3)  A ray of light passing through the optical centre of a lens", r" will emerge without any deviation. ",font_size=45,color=GOLD_E,tex_environment="{minipage}{10cm}").next_to(title,DOWN).to_edge(LEFT)
+        self.next_slide()
+        [l,pa,f,s1,s2] = ConcaveLens(R=6.5,pae=0,pas=0)
+        ir1 = Ray(start=l.get_center()+f*LEFT+0.8*UP,end=l.get_center(),color=PURE_GREEN,eext=0.5)
+        rr1 = Ray(start=ir1[0].get_end(),end=4*ir1[0].get_unit_vector(),color=PURE_GREEN)
+        img3=VGroup(l,pa,ir1,rr1).next_to(case3,DOWN,buff=1)
+
+        anm = [case3[0],VGroup(l,pa,ir1),VGroup(rr1,case3[1])]
+
+        for item in anm:
+            self.play(Write(item))
+            self.next_slide()
+
+        self.play(FadeOut(case3,img3,title))
+        self.play(FadeIn(VGroup(img1,img2,img3).scale(0.65).arrange(DOWN)))
+        self.next_slide()
+        self.play(FadeOut(VGroup(img1,img2,img3)))
+
+
+class ConcaveImg(Slide):
+    def construct(self):
+        title = Title('Ray Diagram for Concave Lens',color=GREEN,match_underline_width_to_text=True)
+
+        # 1st Ray Diagram
+        pos= Tex(r"Position of Object (i): ", r"At infinity",font_size=35,color=YELLOW,tex_environment="{minipage}{13cm}").to_corner(UL,buff=0.1)
+        pos[0].set_color(RED)
+        self.play(Write(pos))
+        self.next_slide()
+
+        [l,pa,f,s1,s2] = ConcaveLens(R=6.5,c2=False,pae=-0.4,pas=0.1)
+        obj = Arrow(start=l.get_center()+2.8*f*LEFT,end=l.get_center()+2.8*f*LEFT+UP,color=RED,tip_length=0.2,buff=0)
+        objlbl = Tex(r"Object",font_size=30).next_to(obj,DOWN)
+        dline = DashedLine(start=l.get_center()+2.8*f*LEFT, end=l.get_center()+2*f*LEFT)
+        ir1 = VGroup(DashedLine(start=l.get_center()+2.8*f*LEFT+UP, end=l.get_center()+2*f*LEFT+UP,color=PURE_GREEN), Ray(start=l.get_center()+2*f*LEFT+UP,end=l.get_center()+UP,color=PURE_GREEN))
+        ir2 = VGroup(DashedLine(start=l.get_center()+2.8*f*LEFT-UP, end=l.get_center()+2*f*LEFT-UP,color=PURE_GREEN), Ray(start=l.get_center()+2*f*LEFT-UP,end=l.get_center()-UP,color=PURE_GREEN))
+        dr1 = DashedLine(start=ir1[1][0].get_end(),end=l.get_center()+f*LEFT,color=GREY_A)
+        dr2 = DashedLine(start=ir2[1][0].get_end(),end=l.get_center()+f*LEFT,color=GREY_A)
+        rr1 = Ray(start=ir1[1][0].get_end(),end=ir1[1][0].get_end()-2*dr1.get_unit_vector(),color=PURE_GREEN,ext=0.2)
+        rr2 = Ray(start=ir2[1][0].get_end(),end=ir2[1][0].get_end()-2*dr2.get_unit_vector(),color=PURE_GREEN,ext=0.2)
+        imarrow = CurvedArrow(l.get_center()+f*LEFT,l.get_center()+f*LEFT+0.5*UP+0.5*LEFT,color=ORANGE,tip_length=0.1)
+        imlbl = Tex(r"Image",font_size=30).move_to(imarrow.get_tip()).shift(0.1*UP)
+        img1=VGroup(l,obj,objlbl,dline,pa,ir1,ir2,rr1,rr2,dr1,dr2,imarrow,imlbl).next_to(title,DOWN,buff=0.5)
+
+        anm1 = [VGroup(l,pa),VGroup(dline,obj,objlbl),ir1,VGroup(rr1,dr1),ir2,VGroup(rr2,dr2),VGroup(imarrow,imlbl)]
+        t1 = MobjectTable(
+            [[Tex(r"At the focus  ($F_1$)",font_size=72), Tex(r"Highly diminished, point-sized",font_size=72), Tex(r"Virtual and Erect",font_size=72)]],
+            col_labels=[Text(r"Position of the Image"),Text("Size of the Image"),Text("Nature of the Image")],
+            include_outer_lines=True,).scale(0.44).to_edge(DOWN).to_corner(LEFT,buff=0.8)
+        
+        t1.get_col_labels().set_color(ORANGE)
+
+        for item in anm1:
+            self.play(Write(item))
+            self.wait(2)
+            self.next_slide()
+
+        self.play(Write(t1.get_horizontal_lines()),Write(t1.get_vertical_lines()))
+        self.wait(2)
+        self.next_slide()
+
+        for j in range(3):
+            for i in t1.get_columns()[j]:
+                self.play(Write(i))
+                self.next_slide()
+        
+        self.play(Unwrite(t1),Unwrite(img1),Unwrite(pos))
+        self.wait(2)
+        self.next_slide()
+
+        # 2nd Ray Diagram
+        pos= Tex(r"Position of Object (ii): ", r"Between infinity and optical centre O of the lens",font_size=35,color=YELLOW,tex_environment="{minipage}{13cm}").to_corner(UL,buff=0.1)
+        pos[0].set_color(RED)
+        self.play(Write(pos))
+        self.next_slide()
+
+        [l,pa,f,s1,s2] = ConcaveLens(R=6.5,c2=False,pae=-0.4,pas=0.1)
+        obj = Arrow(start=l.get_center()+1.5*f*LEFT,end=l.get_center()+1.5*f*LEFT+UP,color=RED,tip_length=0.2,buff=0)
+        objlbl = Tex(r"Object",font_size=30).next_to(obj,DOWN)
+        ir1 = Ray(start=l.get_center()+1.5*f*LEFT+UP,end=l.get_center()+UP,color=PURE_GREEN)
+        ir2 = Ray(start=l.get_center()+1.5*f*LEFT+UP,end=l.get_center(),color=PURE_GREEN)
+        dr1 = DashedLine(start=ir1[0].get_end(),end=l.get_center()+f*LEFT,color=GREY_A)
+        rr1 = Ray(start=ir1[0].get_end(),end=ir1[0].get_end()-2*dr1.get_unit_vector(),color=PURE_GREEN,ext=0.3)
+        rr2 = Ray(start=ir2[0].get_end(),end=3*ir2[0].get_unit_vector(),color=PURE_GREEN,ext=0.1)
+        img_pos = Myintersection(dr1,ir2[0])[0]
+        imarrow = Arrow(start=[img_pos[0],0,0],end=img_pos,color=RED,tip_length=0.2,buff=0)
+        imlbl = Tex(r"Image",font_size=30).next_to(imarrow,DOWN)
+        img1=VGroup(l,obj,objlbl,dline,pa,ir1,ir2,rr1,rr2,dr1,imarrow,imlbl).next_to(title,DOWN,buff=0.5)
+
+        anm1 = [VGroup(l,pa),VGroup(obj,objlbl),ir1,VGroup(rr1,dr1),ir2,rr2,VGroup(imarrow,imlbl)]
+        t1 = MobjectTable(
+            [[Tex(r"Between focus ($F_1$) and optical centre O ",font_size=72), Tex(r"Diminished",font_size=72), Tex(r"Virtual and Erect",font_size=72)]],
+            col_labels=[Text(r"Position of the Image"),Text("Size of the Image"),Text("Nature of the Image")],
+            include_outer_lines=True,).scale(0.44).to_edge(DOWN).to_corner(LEFT,buff=0.8)
+        
+        t1.get_col_labels().set_color(ORANGE)
+
+        for item in anm1:
+            self.play(Write(item))
+            self.wait(2)
+            self.next_slide()
+
+        self.play(Write(t1.get_horizontal_lines()),Write(t1.get_vertical_lines()))
+        self.wait(2)
+        self.next_slide()
+
+        for j in range(3):
+            for i in t1.get_columns()[j]:
+                self.play(Write(i))
+                self.next_slide()
+        
+        self.play(Unwrite(t1),Unwrite(img1),Unwrite(pos))
+        self.wait(2)
+        self.next_slide()
 
