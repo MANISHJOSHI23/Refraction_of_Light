@@ -1608,20 +1608,17 @@ class LensFormula(Slide):
         Intro_title = Title('Lens Formula and Magnification', color=GREEN,match_underline_width_to_text=True,underline_buff=0.15).to_corner(UL)
         self.play(ReplacementTransform(title,Intro_title))
         self.next_slide()
-        steps = ItemList(Item(r"Lens Formula: ",r" For spherical lenses, the relationship between $u$, $v$ and $f$ is given by lens formula.",pw="6 cm"),
-                         Item(r"$\dfrac{1}{f}=\dfrac{1}{v}-\dfrac{1}{u}$",pw="6 cm"),
-                         Item(r"Magnification : ",r" For spherical lenses, the relationship between $u$, $v$ and $f$ is given by lens formula.",pw="6 cm"),
-                         Item(r"$\dfrac{1}{f}=\dfrac{1}{v}-\dfrac{1}{u}$",pw="6 cm"),
-                         Item(r"Magnification $(m)$ : ", r" It is the ratio of height of image $(h_i)$ to the height of the object $(h_o)$ \\ \\", r"$m = \dfrac{h_i}{h_o}$",pw="6 cm"),
-                         Item(r"For spherical lenses the magnification $m$", r" is also related to the object distance $(u)$ and image distance $(v)$. \\ \\ ", r"$m =\dfrac{h_i}{h_o}= \dfrac{v}{u}$",pw="6 cm"),
+        steps = ItemList(Item(r"Lens Formula: ",r" For spherical lenses, the relationship between $u$, $v$ and $f$ is given by lens formula.",pw="13 cm"),
+                         Item(r"$\dfrac{1}{f}=\dfrac{1}{v}-\dfrac{1}{u}$",pw="13 cm"),
+                         Item(r"Magnification $(m)$ : ", r" It is the ratio of height of image $(h_i)$ to the height of the object $(h_o)$",pw="13 cm"),
+                         Item(r"$m = \dfrac{h_i}{h_o}$",pw="13 cm"),
+                         Item(r"For spherical lenses the magnification $m$ is also related to the object distance $(u)$ and image distance $(v)$. ",pw="13 cm"),
+                         Item( r"$m =\dfrac{h_i}{h_o}= \dfrac{v}{u}$",pw="13 cm"),
                         buff=MED_SMALL_BUFF).next_to(Intro_title,DOWN,buff=0.15).to_corner(LEFT,buff=0.1)
         
         sr1 = SurroundingRectangle(steps[1])
-        sr2 = SurroundingRectangle(steps[5][1])
-        for item in steps:
-            for subitem in item:
-                self.play(subitem)
-                self.next_slide()
+        sr2 = SurroundingRectangle(steps[5])
+        self.add(steps)
         
         self.play(Write(sr1),Write(sr2))
         self.wait()
