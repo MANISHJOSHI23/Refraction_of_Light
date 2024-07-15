@@ -1554,7 +1554,97 @@ class ConcaveImg(Slide):
                 self.play(Write(i))
                 self.next_slide()
         
-        self.play(Unwrite(t1),Unwrite(img1),Unwrite(pos))
+        self.play(Unwrite(t1),FadeOut(img1),Unwrite(pos))
         self.wait(2)
         self.next_slide()
 
+        sign = Tex(r"Sign convention for spherical lenses : ",font_size=40,color=YELLOW,tex_environment="{minipage}{13cm}").to_corner(UL,buff=0.1)
+
+        steps3 = ItemList(Item(r" For lenses, sign convention are similar to the one used for spherical mirrors. Except that all measurements are taken from the optical centre (O) of the lens.",pw="13 cm"),
+                         Item(r"Focal length of Convex lens is Positive",pw="6 cm"),
+                         Item(r"Focal length of Concave lens is negative",pw="6 cm"),
+                           buff=0.4).next_to(sign,DOWN).to_edge(LEFT,buff=0.2)
+        
+        [l,pa,f,s1,s2] = ConvexLens(R=5.5,pae=0.51,pas=0.05)
+        obj = Arrow(start=l.get_center()+1.5*f*LEFT,end=l.get_center()+1.5*f*LEFT+UP,color=RED,tip_length=0.2,buff=0)
+        objlbl = Tex(r"Object",font_size=30).next_to(obj,RIGHT)
+        ir1 = Ray(start=l.get_center()+1.5*f*LEFT+UP,end=l.get_center()+UP,color=PURE_GREEN)
+        ir2 = Ray(start=l.get_center()+1.5*f*LEFT+UP,end=l.get_center(),color=PURE_GREEN)
+        rr1 = Ray(start=ir1[0].get_end(),end=l.get_center()+f*RIGHT,color=PURE_GREEN,ext=2.1)
+        rr2 = Ray(start=ir2[0].get_end(),end=6*ir2[0].get_unit_vector(),color=PURE_GREEN,ext=0.45)
+        img_pos = Myintersection(rr2[0],rr1[0])[0]
+        imarrow = Arrow(start=[img_pos[0],0,0],end=img_pos,color=RED,tip_length=0.2,buff=0)
+        imlbl = Tex(r"Image",font_size=30).next_to(imarrow,LEFT)
+        img2=VGroup(l,obj,objlbl,pa,ir1,ir2,rr1,rr2,imarrow,imlbl).next_to(title,DOWN,buff=0.5)
+        img3= VGroup(img2,img1).arrange(LEFT).scale(0.55).next_to(steps3,DOWN)
+        
+        self.play(Write(sign),FadeIn(img3))
+        self.next_slide()
+        for item in steps3:
+            self.play(Write(item))
+            self.next_slide()
+
+
+class LensFormula(Slide):
+    def construct(self):
+        title = Title('CHAPTER 1 : LIGHT REFLECTION AND REFRACTION',color=GREEN,match_underline_width_to_text=True)
+        self.add(title)
+        Outline = Tex('Learning Objectives :',color=BLUE,font_size=35).next_to(title,DOWN).to_corner(LEFT,buff=0.1)
+        self.add(Outline)
+        list = BulletedList('Introduction',' Reflection And Laws of reflection','Spherical Mirrors','Image formation by Spherical Mirrors','Ray Diagrams','Uses of Concave and Convex Mirrors',
+                            'Sign Convention','Mirror Formula and Magnification',font_size=35).next_to(Outline,DOWN).align_to(Outline,LEFT)
+
+        list2 = BulletedList('Refraction of Light','Refraction through a Rectangular Glass Slab','Laws of Refraction','The Refractive Index',
+                             'Refraction by Spherical Lenses',' Image Formation by Lenses \& Ray Diagrams',"Lens Formula \& Magnification","Power of a Lens",font_size=35).next_to(Outline,DOWN).next_to(list,RIGHT).align_to(list,UP)
+
+        self.add(list,list2)
+        self.next_slide(loop=True)
+        self.play(FocusOn(list2[6]))
+        self.play(Circumscribe(list2[6]))
+        self.next_slide()
+        self.play(RemoveTextLetterByLetter(list2))
+        self.play(RemoveTextLetterByLetter(list))
+        self.play(RemoveTextLetterByLetter(Outline))
+        Intro_title = Title('Lens Formula and Magnification', color=GREEN,match_underline_width_to_text=True,underline_buff=0.15).to_corner(UL)
+        self.play(ReplacementTransform(title,Intro_title))
+        self.next_slide()
+        steps = ItemList(Item(r"Lens Formula: ",r" For spherical lenses, the relationship between $u$, $v$ and $f$ is given by lens formula.",pw="6 cm"),
+                         Item(r"$\dfrac{1}{f}=\dfrac{1}{v}-\dfrac{1}{u}$",pw="6 cm"),
+                         Item(r"Magnification : ",r" For spherical lenses, the relationship between $u$, $v$ and $f$ is given by lens formula.",pw="6 cm"),
+                         Item(r"$\dfrac{1}{f}=\dfrac{1}{v}-\dfrac{1}{u}$",pw="6 cm"),
+                         Item(r"Magnification $(m)$ : ", r" It is the ratio of height of image $(h_i)$ to the height of the object $(h_o)$ \\ \\", r"$m = \dfrac{h_i}{h_o}$",pw="6 cm"),
+                         Item(r"For spherical lenses the magnification $m$", r" is also related to the object distance $(u)$ and image distance $(v)$. \\ \\ ", r"$m =\dfrac{h_i}{h_o}= \dfrac{v}{u}$",pw="6 cm"),
+                        buff=MED_SMALL_BUFF).next_to(Intro_title,DOWN,buff=0.15).to_corner(LEFT,buff=0.1)
+        
+        sr1 = SurroundingRectangle(steps[1])
+        sr2 = SurroundingRectangle(steps[5][1])
+        for item in steps:
+            for subitem in item:
+                self.play(subitem)
+                self.next_slide()
+        
+        self.play(Write(sr1),Write(sr2))
+        self.wait()
+
+
+class Ex18(Slide):
+    def construct(self):
+        ex_title = Tex(r"Example 18 :", r" A concave lens has focal length of 15 cm. At what distance should the object from the lens be placed so that it forms an image at 10 cm from the lens? Also, find the magnification produced by the lens.",tex_environment="minipage} {13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        for item in ex_title:
+            self.play(Write(item))
+            self.next_slide()
+
+        sol_label =Tex('Solution :',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label)) 
+
+class Ex19(Slide):
+    def construct(self):
+        ex_title = Tex(r"Example 19 :", r" A 2.0 cm tall object is placed perpendicular to the principal axis of a convex lens of focal length 10 cm. The distance of the object from the lens is 15 cm. Find the nature, position and size of the image. Also find its magnification.",tex_environment="minipage} {13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        for item in ex_title:
+            self.play(Write(item))
+            self.next_slide()
+
+        sol_label =Tex('Solution :',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label)) 
