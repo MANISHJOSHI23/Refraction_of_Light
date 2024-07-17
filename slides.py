@@ -1609,20 +1609,20 @@ class LensFormula(Slide):
         self.play(ReplacementTransform(title,Intro_title))
         self.next_slide()
         steps = ItemList(Item(r"Lens Formula: ",r" For spherical lenses, the relationship between $u$, $v$ and $f$ is given by lens formula.",pw="13 cm"),
-                         Item(r"$\dfrac{1}{f}=\dfrac{1}{v}-\dfrac{1}{u}$",pw="13 cm"),
-                         Item(r"Magnification $(m)$ : ", r" It is the ratio of height of image $(h_i)$ to the height of the object $(h_o)$",pw="13 cm"),
-                         Item(r"$m = \dfrac{h_i}{h_o}$",pw="13 cm"),
+                         Item(r"$\dfrac{1}{f}=\dfrac{1}{v}-\dfrac{1}{u}$",pw="13 cm",color=PINK,dot=False),
+                         Item(r"Magnification $(m)$ :", r" It is the ratio of height of image $(h_i)$ to the height of the object $(h_o)$",pw="13.2 cm"),
+                         Item(r"$m = \dfrac{h_i}{h_o}$",pw="13 cm",dot=False),
                          Item(r"For spherical lenses the magnification $m$ is also related to the object distance $(u)$ and image distance $(v)$. ",pw="13 cm"),
-                         Item( r"$m =\dfrac{h_i}{h_o}= \dfrac{v}{u}$",pw="13 cm"),
-                        buff=MED_SMALL_BUFF).next_to(Intro_title,DOWN,buff=0.15).to_corner(LEFT,buff=0.1)
+                         Item( r"$m =\dfrac{h_i}{h_o}= \dfrac{v}{u}$",pw="13 cm",color=PINK,dot=False),
+                        buff=0.3).next_to(Intro_title,DOWN,buff=0.35).to_corner(LEFT,buff=0.2)
         
         sr1 = SurroundingRectangle(steps[1])
         sr2 = SurroundingRectangle(steps[5])
-        self.add(steps)
-        
-        self.play(Write(sr1),Write(sr2))
+        anm = [steps[0],VGroup(steps[1],sr1),steps[2],steps[3],steps[4],VGroup(steps[5],sr2)]
+        for item in anm:
+            self.play(Write(item))
+            self.next_slide()
         self.wait()
-
 
 class Ex18(Slide):
     def construct(self):
@@ -1638,6 +1638,66 @@ class Ex18(Slide):
 class Ex19(Slide):
     def construct(self):
         ex_title = Tex(r"Example 19 :", r" A 2.0 cm tall object is placed perpendicular to the principal axis of a convex lens of focal length 10 cm. The distance of the object from the lens is 15 cm. Find the nature, position and size of the image. Also find its magnification.",tex_environment="minipage} {13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        for item in ex_title:
+            self.play(Write(item))
+            self.next_slide()
+
+        sol_label =Tex('Solution :',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label)) 
+
+
+class Ex20(Slide):
+    def construct(self):
+        ex_title = Tex(r"Example 20 :", r" An object is placed at a distance of 15 cm from a convex lens of focal length 20 cm. List four characteristics (nature, position, etc.) of the image formed by the lens. (AI 2017)",tex_environment="minipage} {13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        for item in ex_title:
+            self.play(Write(item))
+            self.next_slide()
+
+        sol_label =Tex('Solution :',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label)) 
+
+
+class Ex21(Slide):
+    def construct(self):
+        ex_title = Tex(r"Example 21 :", r" The image of an object formed by a lens is of magnification -1. If the distance between the object and its image is 60 cm, what is the focal length of the lens? If the object is moved 20 cm towards the lens, where would the image be formed? State reason and also draw a ray diagram in support of your answer. (AI 2016)",tex_environment="minipage} {13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        for item in ex_title:
+            self.play(Write(item))
+            self.next_slide()
+
+        sol_label =Tex('Solution :',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label)) 
+    
+
+class Ex22(Slide):
+    def construct(self):
+        ex_title = Tex(r"Example 22 :", r" (a) Define focal length of a spherical lens.\\ ", r" (b) A divergent lens has a focal length of 30 cm. At what distance should an object of height 5 cm from the optical centre of the lens be placed so that its image is formed 15 cm away from the lens? Find the size of the image also. \\ ", r"(c) Draw a ray diagram to show the formation of image in the above situation. (AI 2016)",tex_environment="minipage} {13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        for item in ex_title:
+            self.play(Write(item))
+            self.next_slide()
+
+        sol_label =Tex('Solution :',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label)) 
+
+
+class Ex23(Slide):
+    def construct(self):
+        ex_title = Tex(r"Example 23 :", r" The image of a candle flame placed at a distance of 40 cm from a spherical lens is formed on a screen placed on the other side of the lens at a distance of 40 cm from the lens. Identify the type of lens and write its focal length. What will be the nature of the image formed if the candle flame is shifted 25 cm towards the lens? Draw a ray diagram to justify your answer. (Foreign 2014)",tex_environment="minipage} {13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        for item in ex_title:
+            self.play(Write(item))
+            self.next_slide()
+
+        sol_label =Tex('Solution :',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label)) 
+
+
+class Ex24(Slide):
+    def construct(self):
+        ex_title = Tex(r"Example 24 :", r" Rishi went to a palmist to show his palm. The palmist used a special lens for this purpose.\\ \\", r"(i) State the nature of the lens and reason for its use.\\ \\", r"(ii) Where should the palmist place/hold the lens so as to have a real and magnified image of an object?\\ \\", r"(iii) If the focal length of this lens is 10 cm, the lens is held at a distance of 5 cm from the palm, use lens formula to find the position and size of the image.  (2020)",tex_environment="minipage} {13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
         ex_title[0].set_color(GREEN)
         for item in ex_title:
             self.play(Write(item))
