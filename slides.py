@@ -1705,3 +1705,118 @@ class Ex24(Slide):
 
         sol_label =Tex('Solution :',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
         self.play(Write(sol_label)) 
+
+
+class Ex25(Slide):
+    def construct(self):
+        ex_title = Tex(r"Example 25 :", r" A student focused the image of a candle flame on a white screen using a convex lens. He noted down the position of the candle, screen and the lens as under: \\", r"Position of candle : 26 cm \\", r"Position of convex lens : 50 cm \\", r"Position of screen : 90 cm \\", r"Select the row containing the correct values as per sign convention:",tex_environment="minipage} {13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+
+        t1 = MobjectTable(
+            [[Tex(r"$-26$ cm",font_size=72), Tex(r"$-50$ cm",font_size=72),Tex(r"$+30$ cm",font_size=72)],
+             [Tex(r"$-26$ cm",font_size=72), Tex(r"$-40$ cm",font_size=72),Tex(r"$-15$ cm",font_size=72)],
+             [Tex(r"$-24$ cm",font_size=72), Tex(r"$-40$ cm",font_size=72),Tex(r"$+15$ cm",font_size=72)],
+             [Tex(r"$-24$ cm",font_size=72), Tex(r"$+40$ cm",font_size=72),Tex(r"$+15$ cm",font_size=72)],],
+        col_labels=[Text("Object Distance (u) "), Text("Image Distance (v)"),Text("Focal Length (f)")],
+            row_labels=[Text("(a)"), Text("(b)"),Text("(c)"), Text("(d)")], include_outer_lines=True,).scale(0.4).next_to(ex_title,DOWN)
+        
+        t1.get_col_labels().set_color(ORANGE)
+        t1.get_row_labels().set_color(GOLD)
+        
+        for item in ex_title:
+            self.play(Write(item))
+            self.next_slide()
+
+        self.play(Write(t1.get_horizontal_lines().set_color(BLUE_D)),Write(t1.get_vertical_lines().set_color(BLUE_D)))
+        self.next_slide()
+
+        for entry in t1.get_rows():
+            self.play(Write(entry))
+            self.next_slide()
+
+        sol_label =Tex('Solution :',font_size=35, color=ORANGE).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label))
+
+
+class Ex26(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 26 :", r" If the real image of a candle flame formed by a lens is three times the size of the flame and the distance between lens and image is 80 cm, at what distance should the candle be placed from the lens?",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.next_slide()
+
+        op = VGroup(Tex(r'(i)   $-80$ cm ',font_size=35),Tex(r'(ii)   $-40$ cm ',font_size=35),Tex(r'(iii) $-\dfrac{40}{3}$ cm',font_size=35),Tex(r'(iv) $-\dfrac{-80}{3}$ cm  ',font_size=35,tex_environment="{minipage}{10 cm}") ).arrange_in_grid(2,2,buff=(1.5,0.6),col_alignments='ll').next_to(ex_title,DOWN)
+
+        sol_label =Tex('Solution:',font_size=35, color=ORANGE).next_to(op,DOWN).align_to(ex_title,LEFT)
+        for item in op:
+            self.play(Write(item))
+            self.next_slide()
+        self.play(Write(sol_label)) 
+        self.next_slide(loop=True)
+        self.play(Circumscribe(op[3]))
+
+
+class Ex27(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 27 :", r" A converging lens forms a three times magnified image of an object, which can be taken on a screen. If the focal length of the lens is 30 cm, then distance of the object from the lens is:",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.next_slide()
+
+        op = VGroup(Tex(r'(i)   $-55$ cm ',font_size=35),Tex(r'(ii)   $-50$ cm ',font_size=35),Tex(r'(iii) $-45$ cm',font_size=35),Tex(r'(iv) $-40$ cm  ',font_size=35,tex_environment="{minipage}{10 cm}") ).arrange_in_grid(2,2,buff=(1.5,0.6),col_alignments='ll').next_to(ex_title,DOWN)
+
+        sol_label =Tex('Solution:',font_size=35, color=ORANGE).next_to(op,DOWN).align_to(ex_title,LEFT)
+        for item in op:
+            self.play(Write(item))
+            self.next_slide()
+        self.play(Write(sol_label)) 
+        self.next_slide(loop=True)
+        self.play(Circumscribe(op[3]))
+    
+class Ex28(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 28 :", r"An object of 2 cm high is placed at a distance of 64 cm from a white screen on placing a convex lens at a distance of 32 cm from the object it is found that a distant image of the object is formed on the screen. What is the focal length of the convex lens and size of the image formed on the screen? Draw a ray diagram to show the formation of the image in this position of the object with respect to the lens.",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.next_slide()
+
+
+class Ex29(Slide):
+    def construct(self):
+        ex_title = Tex(r"Example 29 :", r"Analyse the following observation table showing variation of image distance (v) with object distance (u) in case of a convex lens and answer the questions that follow without doing any calculations:",tex_environment="minipage} {13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+
+        t1 = MobjectTable(
+            [[Tex(r"$-100$ ",font_size=72), Tex(r"$+25$ ",font_size=72)],
+             [Tex(r"$-60$ ",font_size=72), Tex(r"$+30$ ",font_size=72)],
+             [Tex(r"$-40$ ",font_size=72), Tex(r"$+40$ ",font_size=72)],
+             [Tex(r"$-30$ ",font_size=72), Tex(r"$+60$ ",font_size=72)],
+             [Tex(r"$-25$ ",font_size=72), Tex(r"$+10$ ",font_size=72)],
+             [Tex(r"$-15$ ",font_size=72), Tex(r"$+120$ ",font_size=72)],],
+        col_labels=[Text("Object Distance\n (u) cm"), Text("Image Distance\n (v) cm")],
+            row_labels=[Text("(1)"), Text("(2)"),Text("(3)"), Text("(4)"),Text("(5)"), Text("(6)")], include_outer_lines=True,).scale(0.4).next_to(ex_title,DOWN).to_corner(RIGHT,buff=0.4)
+        
+        t1.get_col_labels().set_color(ORANGE)
+        t1.get_row_labels().set_color(GOLD)
+        
+        for item in ex_title:
+            self.play(Write(item))
+            self.next_slide()
+
+        self.play(Write(t1.get_horizontal_lines().set_color(GREEN_D)),Write(t1.get_vertical_lines().set_color(GREEN_D)))
+        self.next_slide()
+
+        for entry in t1.get_rows():
+            self.play(Write(entry))
+            self.next_slide()
+
+        ex_title2 = Tex(r"(a) What is the focal length of the convex lens? Give reason to justify you answer. \\ \\", r"(b)  Write the serial number of the observation which is not correct. On what basis have you arrived at this conclusion.\\ \\", r"Select an appropriate scale and draw a ray diagram for the observation at S. No 2. Also find the approximate value of magnification.",tex_environment="minipage} {7.5 cm}",font_size=35, color=YELLOW_C).next_to(ex_title,DOWN).align_to(ex_title,LEFT)
+        for item in ex_title2:
+            self.play(Write(item))
+            self.next_slide()
+
+        sol_label =Tex('Solution :',font_size=35, color=ORANGE).next_to(ex_title2,DOWN).align_to(ex_title,LEFT)
+        self.play(Write(sol_label))
