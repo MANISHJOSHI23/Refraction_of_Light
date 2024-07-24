@@ -1820,3 +1820,78 @@ class Ex29(Slide):
 
         sol_label =Tex('Solution :',font_size=35, color=ORANGE).next_to(ex_title2,DOWN).align_to(ex_title,LEFT)
         self.play(Write(sol_label))
+
+class Power(Slide):
+    def construct(self):
+        title = Title('CHAPTER 1 : LIGHT REFLECTION AND REFRACTION',color=GREEN,match_underline_width_to_text=True)
+        self.add(title)
+        Outline = Tex('Learning Objectives :',color=BLUE,font_size=35).next_to(title,DOWN).to_corner(LEFT,buff=0.1)
+        self.add(Outline)
+        list = BulletedList('Introduction',' Reflection And Laws of reflection','Spherical Mirrors','Image formation by Spherical Mirrors','Ray Diagrams','Uses of Concave and Convex Mirrors',
+                            'Sign Convention','Mirror Formula and Magnification',font_size=35).next_to(Outline,DOWN).align_to(Outline,LEFT)
+
+        list2 = BulletedList('Refraction of Light','Refraction through a Rectangular Glass Slab','Laws of Refraction','The Refractive Index',
+                             'Refraction by Spherical Lenses',' Image Formation by Lenses \& Ray Diagrams',"Lens Formula \& Magnification","Power of a Lens",font_size=35).next_to(Outline,DOWN).next_to(list,RIGHT).align_to(list,UP)
+
+        self.add(list,list2)
+        self.next_slide(loop=True)
+        self.play(FocusOn(list2[6]))
+        self.play(Circumscribe(list2[6]))
+        self.next_slide()
+        self.play(RemoveTextLetterByLetter(list2))
+        self.play(RemoveTextLetterByLetter(list))
+        self.play(RemoveTextLetterByLetter(Outline))
+        Intro_title = Title('Power of a Lens', color=GREEN,match_underline_width_to_text=True,underline_buff=0.15).to_corner(UL)
+        self.play(ReplacementTransform(title,Intro_title))
+        self.next_slide()
+
+        steps1 = ItemList(Item(r"It is defined as the reciprocal of focal length.",pw="13 cm",color=YELLOW_D),
+                          Item(r"The degree of convergence or divergence (or bending) of light rays achieved by a lens is expressed in terms of its power. ",pw="13 cm",color=RED),
+                          Item(r"Power $=\dfrac{1}{\text{focal length}}=\dfrac{1}{f}$",pw="13 cm",color=YELLOW_D),
+                          Item(r"S.I. unit of Power is dioptre (D)",pw="13 cm"),
+                          Item(r"1 dioptre is the power of a lens whose focal length is 1 metre. $(1D = 1m^{-1})$",pw="13 cm",color=YELLOW_D),
+                          Item(r"Power of convex lens : Positive ",pw="13 cm"),
+                          Item(r"Power of concave lens : Negative",pw="13 cm",color=YELLOW_D),
+                          Item(r"Power of a lens combination : $P=P_1+P_2+P_3+ .....$ ",pw="13 cm",color=RED),
+                          buff=0.4).next_to(Intro_title,DOWN).to_edge(LEFT,buff=0.3)
+        
+        for item in steps1:
+            self.play(Write(item))
+            self.next_slide()
+
+
+class Ex30(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 30 :", r" Find the power of a concave lens of focal length 20 m",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.next_slide()
+
+
+class Ex31(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 31 :", r" Find the focal length of a lens of power  $-2.0$ D. What type of lens is this?",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.next_slide()
+
+
+class Ex32(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 32 :", r" A doctor has prescribed a corrective lens of power $+1.5$ D. Find the focal length of the lens. Is the prescribed lens diverging or converging?",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title))
+        self.next_slide()
+
+
+class Ex33(Slide):
+    def construct(self):
+
+        ex_title = Tex(r"Example 33 :", r" (a) Two lens have power of +2 D and - 4 D. What is the nature and focal length of each lens?\\ ", r"(b) An object is kept at a distance of 100 cm for a lens of power $-4$ D. Calculate image distance.",tex_environment="{minipage}{13 cm}",font_size=35, color=BLUE_C).to_corner(UP,buff=0.2).to_corner(LEFT,buff=0.2)
+        ex_title[0].set_color(GREEN)
+        self.play(Write(ex_title[0:2]))
+        self.next_slide()
+        self.play(Write(ex_title[2]))
