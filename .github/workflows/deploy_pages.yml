@@ -42,7 +42,7 @@ jobs:
       if: ${{ env.MANIM == 'manim' }}
       run: |
         sudo apt install python3-pip
-        pip install manim==0.18.0.post0
+        pip3 install manim==0.18.0.post0
         sudo apt-get install libcairo2-dev libpango1.0-dev ffmpeg freeglut3-dev
 
     - name: Install manimgl dependencies on Ubuntu
