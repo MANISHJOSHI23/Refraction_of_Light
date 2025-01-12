@@ -19,7 +19,7 @@ concurrency:
 env:
   FILE: 'slides.py'  # Source file where scenes are defined
   MANIM: 'manim'  # manim or manimgl - which Manim renderer to use
-  SCENES: 'Refraction   '  # Space-separated list of scenes to render
+  SCENES: 'Refraction LawsRefraction RefIndex Lens LensTerms Focus ConvexRules ConvexLensImg ConvexImg ConcaveLensImg ConcaveImg LensFormula Ex18 Ex19 Ex20 Ex21 Ex22 Ex23 Ex24 Ex25 Ex26 Ex27 Ex28 Ex29 Power Ex30 Ex31 Ex32 Ex33'  # Space-separated list of scenes to render
   USES_TEX: true  # true or false - disabling this will make the action run faster
   DISPLAY: :99  # Do not touch this
 
