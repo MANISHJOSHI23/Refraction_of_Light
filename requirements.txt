@@ -1,2 +1,2 @@
 manim==0.18.0.post0
-manim_slides[manimgl]==5.1.0
+manim_slides[manimgl]==5.3.0
