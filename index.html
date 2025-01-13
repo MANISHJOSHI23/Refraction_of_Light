@@ -14,6 +14,88 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/zenburn.min.css">
 
     <!-- <link rel="stylesheet" href="index.css"> -->
+    <style>
+        #controls-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+        }
+
+        #controls-container:hover,
+        #controls-container.active {
+            opacity: 1;
+        }
+
+        .control-btn {
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 20px;
+        }
+
+        .control-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        #stopwatch-display {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 24px;
+            display: none;
+        }
+
+        #clock-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0.3;
+            transition: opacity 0.3s;
+        }
+
+        #clock-container:hover,
+        #clock-container.active {
+            opacity: 1;
+        }
+
+        #clock-btn {
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 20px;
+        }
+
+        #clock-display {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 24px;
+            display: none;
+        }
+    </style>
   </head>
 
   <body>
@@ -2686,6 +2768,104 @@
       });
 
       
+    </script>
+     <div id="controls-container">
+        <div id="stopwatch-display">00:00:00</div>
+        <button class="control-btn" id="playPauseBtn">▶</button>
+        <button class="control-btn" id="resetBtn">⟳</button>
+        <button class="control-btn" id="fullscreenBtn">⛶</button>
+    </div>
+
+    <div id="clock-container">
+        <div id="clock-display"></div>
+        <button id="clock-btn">🕒</button>
+    </div>
+
+    <script>
+        const controls = document.getElementById('controls-container');
+        const display = document.getElementById('stopwatch-display');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+        let stopwatch;
+        let isRunning = false;
+        let time = 0;
+
+        function formatTime(ms) {
+            const hours = Math.floor(ms / 3600000);
+            const minutes = Math.floor((ms % 3600000) / 60000);
+            const seconds = Math.floor((ms % 60000) / 1000);
+            return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        playPauseBtn.addEventListener('click', () => {
+            if (!isRunning) {
+                display.style.display = 'block';
+                controls.classList.add('active');
+                isRunning = true;
+                playPauseBtn.textContent = '⏸';
+                const startTime = Date.now() - time;
+                stopwatch = setInterval(() => {
+                    time = Date.now() - startTime;
+                    display.textContent = formatTime(time);
+                }, 1000);
+            } else {
+                clearInterval(stopwatch);
+                isRunning = false;
+                playPauseBtn.textContent = '▶';
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            clearInterval(stopwatch);
+            isRunning = false;
+            time = 0;
+            display.style.display = 'none';
+            controls.classList.remove('active');
+            playPauseBtn.textContent = '▶';
+        });
+
+        fullscreenBtn.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+                fullscreenBtn.textContent = "↙";
+            } else {
+                document.exitFullscreen();
+                fullscreenBtn.textContent = "⛶";
+            }
+        });
+
+        const clockContainer = document.getElementById('clock-container');
+        const clockBtn = document.getElementById('clock-btn');
+        const clockDisplay = document.getElementById('clock-display');
+        let isClockVisible = false;
+
+        function updateTime() {
+            const now = new Date();
+            const time = now.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            });
+            clockDisplay.textContent = time;
+        }
+
+        clockBtn.addEventListener('click', () => {
+            isClockVisible = !isClockVisible;
+            clockDisplay.style.display = isClockVisible ? 'block' : 'none';
+            clockContainer.classList.toggle('active', isClockVisible);
+            if (isClockVisible) {
+                updateTime();
+            }
+        });
+
+        // Update time every minute
+        setInterval(() => {
+            if (isClockVisible) {
+                updateTime();
+            }
+        }, 60000);
     </script>
 
     
