@@ -92,7 +92,7 @@ jobs:
     - name: Build HTML
       run: |
         ${{ env.MANIM }} ${{ env.FILE }} ${{ env.SCENES }}
-        manim-slides convert --use-template='newconfig.html' -ctitle='Refraction of Light PPT - Manish Joshi' -ccontrols=true -cprogress=true ${{ env.SCENES }} _site/index.html
+        manim-slides convert -ctitle='Refraction of Light PPT - Manish Joshi' -ccontrols=true -cprogress=true ${{ env.SCENES }} _site/index.html
 
     - name: Push to gh-pages branch
       if: github.event_name != 'pull_request'
